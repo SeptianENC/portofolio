@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>MyPortofolio</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="css/plugins/animate.css"/>
+        <link rel="stylesheet" href="css/plugins/animated-headlines.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css"/>
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Muli:200,300,400,600,700,800,900" rel="stylesheet">
+        <link rel="stylesheet" href="css/plugins/animated-headlines.css">
+        <link rel="stylesheet" href="css/plugins/magnific-popup.css"/>
+        <link rel="stylesheet" href="css/main.css"/>
+        <style>
+            .box {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+            }
+
+            .services .row {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .services .col-lg-4 {
+                display: flex;
+                flex: 1 0 33%;
+                margin-bottom: 20px;
+            }
+
+            .left-content .btn {
+                position: relative;
+            }
+
+
+        </style>
+
+    </head>
+
+    <body>
+        <!-- menu -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="#"><img src="img/logo.png" alt=""></a>
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#slider">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#services">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#portfolio">Portfolio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#testimonials">Testimonials</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a
+                                class="nav-link "
+                                href="#"
+                                id="navbarDropdown"
+                                role="button"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false">
+                                Blog
+                                <span class="fa fa-angle-down"></span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="../blog/index.html">Blog List</a>
+                                <a class="dropdown-item" href="../single-post/index.html">Single Post</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- slider -->
+        <section class="slider d-flex justify-content-center" id="slider">
+            <div class="container text-center">
+                    <div class="row all-content">
+                        <div class="col-12">
+                            <div class="left-content">
+                                <p class="hello">
+                                    HELLO I'M</p>
+                                <div class="animated-headlines">
+                                    <h1 class="cd-headline clip is-full-width">
+                                        <span class="cd-words-wrapper">
+                                            <b class="is-visible">Septian Eko Nurcahyanto</b>
+                                            <b>Web Developer</b>
+                                            <b>DevSecOps Enginer</b>
+                                            <b>Software Architect</b>
+                                        </span>
+                                    </h1>
+                                </div>
+                                <p class="paragraph">
+                                    Having spent over six years in the IT sector, I have dedicated myself to crafting innovative software solutions and ensuring the security of applications from the development phase through to production.
+                                    My expertise spans a broad range of skills, including application development, system integration, and the application of DevSecOps principles. This diverse skill set enables me to enhance the efficiency and security of your applications, ensuring they meet the highest standards of quality and innovation.
+                                    Let's collaborate to transform your digital challenges into opportunities for growth.
+                                    <br> <br>
+                                    Selama lebih dari enam tahun berkecimpung di industri teknologi informasi, saya telah mengalokasikan seluruh dedikasi saya dalam merancang solusi perangkat lunak yang penuh inovasi serta menjamin keamanan aplikasi sejak tahap pengembangan hingga ke produksi.
+                                    Kompetensi saya yang luas, termasuk dalam pengembangan aplikasi, integrasi sistem, serta implementasi prinsip-prinsip DevSecOps.
+                                    Kemampuan serbaguna ini memampukan saya untuk meningkatkan efisiensi serta keamanan aplikasi Anda, memastikan bahwa mereka memenuhi standar kualitas dan inovasi yang tinggi.
+                                    Mari berkolaborasi untuk mengubah setiap tantangan digital yang dihadapi menjadi momentum pertumbuhan yang berarti bagi bisnis Anda.
+                                </p>
+                                <a href="docs/drh.pdf" class="btn" target="_blank" z-index="-1">
+                                    Download CV</a>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div id="particles-js" class="particels"></div>
+        </section>
+
+        <!-- tentang saya -->
+        <section class="about-me" id="about">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 d-flex justify-content-center">
+                        <img src="img/foto/4.jpg" alt="" class="img-fluid rounded" class="mx-auto d-block">
+                    </div>
+                    <div class="col-md-7">
+                        <h2>About Me</h2>
+                        <p>
+                        Seorang profesional berpengalaman di bidang teknologi informasi dengan spesialisasi sebagai Software Developer, DevSecOps Engineer, dan Software Architect.
+                        Selama lebih dari enam tahun, saya telah mendedikasikan diri dalam mengembangkan solusi perangkat lunak yang inovatif dan memastikan keamanan aplikasi dari tahap pengembangan hingga produksi.
+                        Keahlian saya mencakup berbagai aspek teknologi, mulai dari pengembangan aplikasi monolith ataupun microservices hingga integrasi sistem yang kompleks,
+                        sembari menerapkan prinsip-prinsip DevSecOps untuk meningkatkan efisiensi dan keamanan aplikasi.
+                        <br> <br>
+                        Komitmen saya terhadap keunggulan telah memungkinkan saya untuk berkontribusi pada berbagai proyek yang berhasil meningkatkan operasi bisnis dan keamanan data.
+                        Saya percaya pada pentingnya belajar berkelanjutan dan selalu berusaha untuk memperbarui pengetahuan saya dengan teknologi terbaru.
+                        Dengan pendekatan yang berpusat pada solusi, saya berdedikasi untuk mengatasi tantangan teknis dan menyediakan nilai tambah bagi tim dan klien.
+                        Mari kita kolaborasi untuk mengubah tantangan digital Anda menjadi peluang pertumbuhan yang signifikan.
+                        </p>
+                        <a href="docs/drh.pdf" class="btn-1" target="_blank">Download CV</a>
+                        <a href="#portfolio" class="btn-2">Portfolio</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- service-->
+        <section class="services" id="services">
+            <h2 class="text-center">Our Services</h2>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="box">
+                            <span class="fa fa-cog"></span>
+                            <h3>Custom Web Development</h3>
+                            <p>We specialize in creating custom web solutions tailored to your business needs. From corporate websites to complex web applications, we leverage the latest technologies to deliver exceptional user experiences and boost your business performance.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="box">
+                            <span class="fa fa-shield"></span>
+                            <h3>Application Security & DevSecOps Consulting</h3>
+                            <p>Integrating best security practices into your software development lifecycle, we offer DevSecOps consulting to safeguard your applications from development to production, reducing risks and accelerating deployment.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="box">
+                            <span class="fa fa-lock"></span>
+                            <h3>System Hardening</h3>
+                            <p>Implementing system hardening strategies, we enhance the security of your IT infrastructure. We assess and fortify system configurations, reducing attack surfaces and protecting your data and applications from security threats.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="box">
+                            <span class="fa fa-cubes"></span>
+                            <h3>Software Architecture & System Design</h3>
+                            <p>We design scalable and high-performance software architectures. Our strategic system designs ensure your applications grow with your business, maintaining efficiency and manageability.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="box">
+                            <span class="fa fa-rocket"></span>
+                            <h3>Performance Optimization & Scalability</h3>
+                            <p>Enhance your application's performance and scalability with our advanced technical solutions. We conduct in-depth analysis and implement optimal practices to ensure your application can handle increasing workloads seamlessly.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="box">
+                            <span class="fa fa-plug"></span>
+                            <h3>API Development and System Integration</h3>
+                            <p>Developing and integrating secure and efficient APIs, we facilitate seamless system communication. We ensure smooth data integration between your application and third-party services, enhancing functionality and flexibility.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="box">
+                            <span class="fa fa-wrench"></span>
+                            <h3>Application Maintenance & Support</h3>
+                            <p>Providing comprehensive application maintenance services, we ensure your application operates optimally at all times. From routine updates and bug fixes to feature enhancements, we keep your application relevant and efficient.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="box">
+                            <span class="fa fa-server"></span>
+                            <h3>Managed Hosting & VPS Services</h3>
+                            <p>Offering top-tier managed hosting and VPS services tailored to your business needs. We ensure your online presence is robust, reliable, and ready to scale. From server setup, security hardening, performance optimization, to continuous monitoring, let us handle the technicalities while you focus on growing your business.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="box">
+                            <span class="fa fa-graduation-cap"></span>
+                            <h3>Technology Training & Workshops</h3>
+                            <p>We offer training sessions and workshops on various technology topics for your team, from web development and application security to cloud technology usage. We help enhance your team's skills and knowledge, ensuring they stay abreast of the latest trends.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- statistik -->
+        <section class="some-facts">
+            <div class="container text-center">
+                <div class="row">
+                    <!-- Box-1 -->
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="items">
+                            <span class="fa fa-skyatlas"></span>
+                            <h3>
+                                <span class="counter">368</span></h3>
+                            <div class="line mx-auto"></div>
+                            <h4>Happy Clients</h4>
+                        </div>
+                    </div>
+                    <!-- Box-2 -->
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="items">
+                            <span class="fa fa-heart-o"></span>
+                            <h3>
+                                <span class="counter">937</span></h3>
+                            <div class="line mx-auto"></div>
+                            <h4>Projects Compleated</h4>
+                        </div>
+                    </div>
+                    <!-- Box-3 -->
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="items">
+                            <span class="fa fa-globe"></span>
+                            <h3>
+                                <span class="counter">438</span></h3>
+                            <div class="line mx-auto"></div>
+                            <h4>Files Downloaded</h4>
+                        </div>
+                    </div>
+                    <!-- Box-4 -->
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="items">
+                            <span class="fa fa-user-o"></span>
+                            <h3>
+                                <span class="counter">5946</span></h3>
+                            <div class="line mx-auto"></div>
+                            <h4>Liens Of Code</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- portofolio -->
+        <section class="portfolio" id="portfolio">
+            <div class="container">
+                <h2 class="text-center">Portfolio</h2>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="button-group filter-button-group text-center">
+                            <button data-filter="*" class="active">All</button>
+                            <button data-filter=".development">Development</button>
+                            <button data-filter=".hardening">Hardening System</button>
+                            <button data-filter=".architecture">Software Architecture</button>
+                            <button data-filter=".vulnerability">Vulnerability Assessments</button>
+                            <button data-filter=".object">Object Storage</button>
+                            <button data-filter=".database">Database Cluster</button>
+                            <button data-filter=".maintenance">Application Maintenance</button>
+                            <button data-filter=".virtual">Virtualization</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row grid">
+                    <div class="col-lg-4 col-md-6 grid-item development">
+                        <div class="single-portfolio-item ">
+                            <img src="img/portfolio/siberintegritas.png" alt="" class="img-fluid">
+                            <div class="overlay text-center">
+                                <div class="content">
+                                    <h3>Siberintegritas</h3>
+                                    <p>Web Application</p>
+                                    <a href="img/portfolio/siberintegritas.png" class="image-link">
+                                        <span class="fa fa-eye"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 grid-item object">
+                        <div class="single-portfolio-item">
+                            <img src="img/portfolio/minio.png" alt="" class="img-fluid">
+                            <div class="overlay text-center">
+                                <div class="content">
+                                    <h3>Minio</h3>
+                                    <p>Object Storage</p>
+                                    <a href="img/portfolio/minio.png" class="image-link">
+                                        <span class="fa fa-eye"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 grid-item object">
+                        <div class="single-portfolio-item">
+                            <img src="img/portfolio/minio2.png" alt="" class="img-fluid">
+                            <div class="overlay text-center">
+                                <div class="content">
+                                    <h3>Minio</h3>
+                                    <p>Object Storage</p>
+                                    <a href="img/portfolio/minio2.png" class="image-link">
+                                        <span class="fa fa-eye"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 grid-item object">
+                        <div class="single-portfolio-item">
+                            <img src="img/portfolio/minio3.png" alt="" class="img-fluid">
+                            <div class="overlay text-center">
+                                <div class="content">
+                                    <h3>Minio</h3>
+                                    <p>Object Storage</p>
+                                    <a href="img/portfolio/minio3.png" class="image-link">
+                                        <span class="fa fa-eye"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 grid-item virtual">
+                        <div class="single-portfolio-item">
+                            <img src="img/portfolio/proxmox.png" alt="" class="img-fluid">
+                            <div class="overlay text-center">
+                                <div class="content">
+                                    <h3>Proxmox</h3>
+                                    <p>Virtual Server</p>
+                                    <a href="img/portfolio/proxmox.png" class="image-link">
+                                        <span class="fa fa-eye"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 grid-item virtual">
+                        <div class="single-portfolio-item">
+                            <img src="img/portfolio/proxmox2.png" alt="" class="img-fluid">
+                            <div class="overlay text-center">
+                                <div class="content">
+                                    <h3>Proxmox</h3>
+                                    <p>Virtual Server</p>
+                                    <a href="img/portfolio/proxmox2.png" class="image-link">
+                                        <span class="fa fa-eye"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 grid-item architecture">
+                        <div class="single-portfolio-item">
+                            <img src="img/portfolio/arch.png" alt="" class="img-fluid">
+                            <div class="overlay text-center">
+                                <div class="content">
+                                    <h3>Cekreputasi</h3>
+                                    <p>Big Architecture</p>
+                                    <a href="img/portfolio/arch.png" class="image-link">
+                                        <span class="fa fa-eye"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 grid-item architecture">
+                        <div class="single-portfolio-item">
+                            <img src="img/portfolio/arch2.png" alt="" class="img-fluid">
+                            <div class="overlay text-center">
+                                <div class="content">
+                                    <h3>Cekreputasi</h3>
+                                    <p>Small Architecture</p>
+                                    <a href="img/portfolio/arch2.png" class="image-link">
+                                        <span class="fa fa-eye"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- testimoni-->
+        <section class="testimonials" id="testimonials">
+            <div class="container text-center">
+                <h2>Testimonials</h2>
+                <div class="row text-center">
+                    <div class="col-md-12">
+                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                            </ol>
+
+                            <div class="carousel-inner">
+                                <div class="carousel-item active text-center">
+                                        <img src="img/testimonials.png" alt="" class="colon">
+                                        <p>Septian berhasil mengembangkan aplikasi CekReputasi, meningkatkan kualitas layanan kami secara signifikan.<br>
+                                            Keahliannya menciptakan solusi efektif dan aman sangat mengesankan.
+                                            Secara Kompetensi, kami sangat merekomendasikan jasa beliau.</p>
+                                            <img src="https://via.placeholder.com/90x90" alt="" class="center-block team">
+                                        <h3>Syahrul</h3>
+                                        <h4>PT. SiberIntegritas</h4>
+                                </div>
+                                <div class="carousel-item text-center">
+                                        <img src="img/testimonials.png" alt="" class="colon">
+                                        <p>Kerja sama dengan Septian Eko membawa inovasi nyata pada aplikasi kami, meningkatkan performa dan keamanan.<br>
+                                            Keahliannya luar biasa, sangat direkomendasikan!</p>
+                                            <img src="https://via.placeholder.com/90x90" alt="" class="center-block team">
+                                        <h3>Hendra</h3>
+                                        <h4>PT. Inovasi Digital Nusantara</h4>
+                                </div>
+                                <div class="carousel-item text-center">
+                                        <img src="img/testimonials.png" alt="" class="colon">
+                                        <p>Septian mengoptimalkan proyek kami dengan solusi cerdas dan keamanan aplikasi yang tangguh.<br>
+                                            Profesionalisme dan hasil kerjanya sangat mengesankan.</p>
+                                            <img src="https://via.placeholder.com/90x90" alt="" class="center-block team">
+                                        <h3>Rina</h3>
+                                        <h4>DigiCorp</h4>
+                                </div>
+                                <div class="carousel-item text-center">
+                                        <img src="img/testimonials.png" alt="" class="colon">
+                                        <p>Kolaborasi dengan Septian membuka peluang baru bagi kami, meningkatkan keamanan dan efisiensi.<br>
+                                            Sangat merekomendasikan keahliannya yang komprehensif</p>
+                                            <img src="https://via.placeholder.com/90x90" alt="" class="center-block team">
+                                        <h3>Agus Setiyawan</h3>
+                                        <h4>Solusi Tekno Kreatif</h4>
+                                </div>
+
+                            </div>
+                            <a
+                                class="carousel-control-prev"
+                                href="#carouselExampleIndicators"
+                                role="button"
+                                data-slide="prev">
+                                <span class="fa fa-angle-left icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a
+                                class="carousel-control-next"
+                                href="#carouselExampleIndicators"
+                                role="button"
+                                data-slide="next">
+                                <span class="fa fa-angle-right icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- blog -->
+        <section class="blog" id="blog">
+            <div class="container">
+                <h2 class="text-center">Our Blog</h2>
+                <div class="row">
+                    <div class="co-md-6 col-lg-4">
+                        <div class="box">
+                            <div class="image">
+                                    <img src="https://via.placeholder.com/400x250" alt="">
+                                    <a href="" class="cate">Web</a>
+                            </div>
+                            <div class="text">
+                                    <h3><a href="">Master These Awesome</a></h3>
+                                    <h4>By Dorian Gray, Jun 27, 2018</h4>
+                                    <p>Lorem Ipsum has been standard. Lorem Ipsum is simply text of the printing and typesetting industry. Lorem Ipsum has been</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="co-md-6 col-lg-4">
+                            <div class="box">
+                                <div class="image">
+                                        <img src="https://via.placeholder.com/400x250" alt="">
+                                        <a href="" class="cate">Web</a>
+                                </div>
+                                <div class="text">
+                                        <h3><a href="">Best Design Items to Appeal</a></h3>
+                                        <h4>By Dorian Gray, Jun 27, 2018</h4>
+                                        <p>Lorem Ipsum has been standard. Lorem Ipsum is simply text of the printing and typesetting industry. Lorem Ipsum has been</p>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="co-md-6 col-lg-4">
+                            <div class="box">
+                                <div class="image">
+                                        <img src="https://via.placeholder.com/400x250" alt="">
+                                        <a href="" class="cate">Web</a>
+                                </div>
+                                <div class="text">
+                                        <h3><a href="">The 20 Best Lightroom Presets</a></h3>
+                                        <h4>By Dorian Gray, Jun 27, 2018</h4>
+                                        <p>Lorem Ipsum has been standard. Lorem Ipsum is simply text of the printing and typesetting industry. Lorem Ipsum has been</p>
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- kontak -->
+        <section class="contact" id="contact"> 
+            <h2 class="text-center">Keep In Touch</h2>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <form onsubmit="sendWhatsAppMessage(event)">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <input type="text" id="name" class="form-control" placeholder="Name" required>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="email" id="email" class="form-control" placeholder="Email" required>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="text" id="subject" class="form-control" placeholder="Subject" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" id="message" rows="5" placeholder="Message" required></textarea>
+                            </div>
+                            <button class="btn btn-block" type="submit">Send Now!</button>
+                        </form>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="info">
+                            <span class="fa fa-map-marker"></span>
+                            <p>Bojongsari, Depok, 
+                                <br>
+                                Jawa Barat, 16516</p>
+
+                            <span class="fa fa-linkedin"></span>
+                            <p><a href="https://www.linkedin.com/in/septian-eko" style="color: white; text-decoration: none;">https://www.linkedin.com/in/septian-eko</a></p>
+                            <span class="fa fa-envelope"></span>
+                            <p>septian.enc@gmail.com <br> septian.en@live.com</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- footer-->
+        <footer class="footer text-center">
+            <div class="social-icons">
+                <span class="fa fa-facebook" aria-hidden="true"></span>
+            <span class="fa fa-twitter" aria-hidden="true"></span>
+            <span class="fa fa-dribbble" aria-hidden="true"></span>
+            <span class="fa fa-skype" aria-hidden="true"></span>
+            </div>
+            <p>All Right Reserved 2024</p>
+        </footer>
+
+        <!-- ==== javascript libraries ==== -->
+        <!-- jQuery-->
+        <script src="js/plugins/jquery-3.3.1.min.js"></script>
+        <!-- Bootstrap 4.1.3 -->
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/plugins/popper.min.js"></script>
+        <!-- Animated Headlines -->
+        <script src="js/plugins/animated-headlines.js"></script>
+        <!-- Nav jQuery-->
+        <script src="js/plugins/nav.jquery.js"></script>
+        <!-- Nav jQuery-->
+        <script src="js/plugins/jquery.stellar.js"></script>
+        <!-- Isotope -->
+        <script src="js/plugins/isotope.pkgd.min.js"></script>
+        <!-- Image Loaded -->
+        <script src="js/plugins/imagesloaded.pkgd.min.js"></script>
+        <!-- Magnific Popup -->
+        <script src="js/plugins/magnific-popup.min.js"></script>
+        <!-- Smooth-Scroll -->
+        <script src="js/smooth-scroll.js"></script>
+        <!-- Counter Up -->
+        <script src="js/plugins/jquery.waypoints.min.js"></script>
+        <script src="js/plugins/jquery.counterup.min.js"></script>
+        <!-- Particles Js -->
+        <script src="js/plugins/particles.min.js"></script>
+        <script src="js/plugins/app.js"></script>
+        <!-- Animated Headlines -->
+        <script src="js/plugins/animated-headlines..j"></script>
+        <script src="js/main.js"></script>
+        <script>
+            function sendWhatsAppMessage(e) {
+                e.preventDefault();
+                
+                var name = document.getElementById('name').value;
+                var email = document.getElementById('email').value;
+                var subject = document.getElementById('subject').value;
+                var message = document.getElementById('message').value;
+                
+                var waMessage = `Name: ${name}%0AEmail: ${email}%0ASubject: ${subject}%0AMessage: ${message}`;
+                
+                var yourWhatsAppNumber = "6281380344711";
+                
+                var waUrl = `https://wa.me/${yourWhatsAppNumber}?text=${waMessage}`;
+                
+                window.open(waUrl, '_blank');
+            }
+        </script>
+
+    </body>
+</html>
