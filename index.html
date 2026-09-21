@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self' 'unsafe-inline' https://stackpath.bootstrapcdn.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; object-src 'none';">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' https://stackpath.bootstrapcdn.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://stackpath.bootstrapcdn.com https://cdnjs.cloudflare.com; font-src 'self' data: https://fonts.gstatic.com https://stackpath.bootstrapcdn.com https://cdnjs.cloudflare.com; object-src 'none';">
         <meta name="referrer" content="no-referrer-when-downgrade">
         <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=()">
         <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'none';">
@@ -46,14 +46,565 @@
                 display: none;
             }
 
+            /* —— Enhancements —— */
+            html {
+                scroll-behavior: smooth;
+            }
 
+            body {
+                height: auto !important;
+                overflow-x: hidden;
+            }
+
+            .scroll-progress {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 4px;
+                width: 0%;
+                background: linear-gradient(90deg, #e0a80d, #f5d76e);
+                z-index: 9999;
+                transition: width 0.1s linear;
+                box-shadow: 0 0 12px rgba(224, 168, 13, 0.55);
+            }
+
+            .navbar {
+                transition: padding 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
+            }
+
+            .navbar.scrolled {
+                padding: 12px 0 !important;
+                background: rgba(33, 34, 34, 0.92) !important;
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+            }
+
+            .navbar .nav-item .nav-link {
+                position: relative;
+                transition: color 0.3s ease;
+            }
+
+            .navbar .nav-item .nav-link::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 0;
+                height: 2px;
+                background: #e0a80d;
+                transition: width 0.3s ease;
+            }
+
+            .navbar .nav-item .nav-link:hover::after,
+            .navbar .nav-item .nav-link.active::after {
+                width: 100%;
+            }
+
+            .navbar .nav-item .nav-link.active {
+                color: #ffffff !important;
+            }
+
+            /* Smooth section dividers (overlap previous section, no color bands) */
+            .section-divider {
+                position: relative;
+                width: 100%;
+                height: 0;
+                line-height: 0;
+                margin: 0;
+                padding: 0;
+                pointer-events: none;
+                z-index: 5;
+            }
+
+            .section-divider svg {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                display: block;
+                width: 100%;
+                height: 72px;
+            }
+
+            @media (max-width: 767px) {
+                .section-divider svg {
+                    height: 42px;
+                }
+            }
+
+            /* Cursor spotlight */
+            .cursor-glow {
+                position: fixed;
+                width: 320px;
+                height: 320px;
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 4;
+                background: radial-gradient(circle, rgba(224, 168, 13, 0.12) 0%, transparent 70%);
+                transform: translate(-50%, -50%);
+                opacity: 0;
+                transition: opacity 0.35s ease;
+                mix-blend-mode: screen;
+            }
+
+            .cursor-glow.is-on {
+                opacity: 1;
+            }
+
+            /* Scroll reveal — more dramatic */
+            .reveal {
+                opacity: 0;
+                transform: translateY(56px);
+                transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+                            transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+                will-change: opacity, transform;
+            }
+
+            .reveal.from-left {
+                transform: translateX(-64px);
+            }
+
+            .reveal.from-right {
+                transform: translateX(64px);
+            }
+
+            .reveal.scale-in {
+                transform: scale(0.86) translateY(24px);
+            }
+
+            .reveal.is-visible {
+                opacity: 1;
+                transform: none;
+            }
+
+            .reveal-delay-1 { transition-delay: 0.12s; }
+            .reveal-delay-2 { transition-delay: 0.24s; }
+            .reveal-delay-3 { transition-delay: 0.36s; }
+            .reveal-delay-4 { transition-delay: 0.48s; }
+            .reveal-delay-5 { transition-delay: 0.6s; }
+            .reveal-delay-6 { transition-delay: 0.72s; }
+
+            /* Hero polish */
+            .slider {
+                position: relative;
+                overflow: hidden;
+            }
+
+            .slider .left-content {
+                position: relative;
+                z-index: 2;
+            }
+
+            .slider .left-content .btn {
+                overflow: hidden;
+                transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease, color 0.35s ease;
+            }
+
+            .slider .left-content .btn:hover {
+                background: #e0a80d;
+                color: #1a1a1a;
+                transform: translateY(-3px);
+                box-shadow: 0 12px 28px rgba(224, 168, 13, 0.35);
+            }
+
+            .scroll-hint {
+                position: absolute;
+                bottom: 28px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 3;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+                color: rgba(255, 255, 255, 0.65);
+                font-size: 11px;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+                text-decoration: none;
+                transition: color 0.3s ease, opacity 0.3s ease;
+            }
+
+            .scroll-hint:hover {
+                color: #e0a80d;
+                text-decoration: none;
+            }
+
+            .scroll-hint .mouse {
+                width: 22px;
+                height: 34px;
+                border: 2px solid rgba(255, 255, 255, 0.45);
+                border-radius: 12px;
+                position: relative;
+            }
+
+            .scroll-hint .mouse::before {
+                content: '';
+                position: absolute;
+                top: 6px;
+                left: 50%;
+                width: 3px;
+                height: 7px;
+                margin-left: -1.5px;
+                background: #e0a80d;
+                border-radius: 2px;
+                animation: scroll-wheel 1.6s ease-in-out infinite;
+            }
+
+            @keyframes scroll-wheel {
+                0% { opacity: 1; transform: translateY(0); }
+                100% { opacity: 0; transform: translateY(10px); }
+            }
+
+            /* About photo — keep aspect ratio, never squash */
+            .about-me .about-photo {
+                width: 100%;
+                max-width: 380px;
+                margin: 0 auto;
+                border-radius: 14px;
+                overflow: hidden;
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+                aspect-ratio: 3 / 4;
+                background: #212222;
+            }
+
+            .about-me .about-photo img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center top;
+                padding: 0 !important;
+                border-radius: 0;
+                box-shadow: none;
+                transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            }
+
+            .about-me .about-photo:hover img {
+                transform: scale(1.04);
+            }
+
+            .about-me .about-photo:hover {
+                box-shadow: 0 28px 60px rgba(224, 168, 13, 0.2);
+            }
+
+            @media (max-width: 991.98px) {
+                .about-me .about-photo {
+                    max-width: 280px;
+                    margin-bottom: 30px;
+                }
+            }
+
+            @media (max-width: 575.98px) {
+                .about-me .about-photo {
+                    max-width: 240px;
+                }
+            }
+
+            .about-me .btn-1,
+            .about-me .btn-2 {
+                display: inline-block;
+                transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+            }
+
+            .about-me .btn-1:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 10px 24px rgba(224, 168, 13, 0.4);
+                color: #1a1a1a;
+            }
+
+            .about-me .btn-2:hover {
+                background: #e0a80d;
+                color: #1a1a1a;
+                transform: translateY(-3px);
+            }
+
+            /* Services cards */
+            .services .box {
+                border-radius: 14px;
+                border: 1px solid rgba(255, 255, 255, 0.06);
+                position: relative;
+                overflow: hidden;
+                transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                            box-shadow 0.35s ease,
+                            border-color 0.35s ease,
+                            background 0.35s ease;
+                cursor: pointer;
+            }
+
+            .services .box::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 3px;
+                background: linear-gradient(90deg, transparent, #e0a80d, transparent);
+                opacity: 0;
+                transition: opacity 0.35s ease;
+            }
+
+            .services .box::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(224, 168, 13, 0.14), transparent 40%);
+                opacity: 0;
+                transition: opacity 0.35s ease;
+                pointer-events: none;
+            }
+
+            .services .box:hover {
+                transform: translateY(-14px) scale(1.02);
+                border-color: rgba(224, 168, 13, 0.55);
+                box-shadow: 0 22px 48px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(224, 168, 13, 0.15);
+                background: #2a2b2b;
+            }
+
+            .services .box:hover::before,
+            .services .box:hover::after {
+                opacity: 1;
+            }
+
+            .services .box .service-icon {
+                display: inline-flex;
+                width: 58px;
+                height: 58px;
+                align-items: center;
+                justify-content: center;
+                border-radius: 14px;
+                background: rgba(224, 168, 13, 0.12);
+                border: 1px solid rgba(224, 168, 13, 0.28);
+                color: #e0a80d;
+                transition: transform 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
+            }
+
+            .services .box .service-icon svg {
+                width: 26px;
+                height: 26px;
+                fill: none;
+                stroke: currentColor;
+                stroke-width: 1.8;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+            }
+
+            .services .box:hover .service-icon {
+                transform: scale(1.15) rotate(-8deg);
+                background: rgba(224, 168, 13, 0.28);
+                box-shadow: 0 8px 20px rgba(224, 168, 13, 0.25);
+            }
+
+            /* Portfolio */
+            .portfolio .single-portfolio-item {
+                overflow: hidden;
+                border-radius: 12px;
+                transition: transform 0.4s ease, box-shadow 0.4s ease;
+                cursor: pointer;
+            }
+
+            .portfolio .single-portfolio-item img {
+                transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+            }
+
+            .portfolio .single-portfolio-item:hover {
+                transform: translateY(-10px) scale(1.02);
+                box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+            }
+
+            .portfolio .single-portfolio-item:hover img {
+                transform: scale(1.1);
+            }
+
+            .portfolio .single-portfolio-item .overlay {
+                border-radius: 12px;
+            }
+
+            .portfolio .button-group button {
+                transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            }
+
+            .portfolio .button-group button:hover {
+                transform: translateY(-3px) scale(1.04);
+            }
+
+            /* Contact */
+            .contact .form-control {
+                transition: box-shadow 0.3s ease, transform 0.3s ease, background 0.3s ease;
+            }
+
+            .contact .form-control:focus {
+                background: #ffffff;
+                box-shadow: 0 0 0 3px rgba(224, 168, 13, 0.35);
+                outline: none;
+                transform: translateY(-1px);
+            }
+
+            .contact button.btn {
+                transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            }
+
+            .contact button.btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 24px rgba(224, 168, 13, 0.4);
+                background: #f0b820;
+            }
+
+            .contact .info .service-icon,
+            .contact .info span.contact-icon {
+                display: inline-flex;
+                width: 42px;
+                height: 42px;
+                align-items: center;
+                justify-content: center;
+                border-radius: 10px;
+                background: rgba(224, 168, 13, 0.12);
+                margin-bottom: 4px;
+                color: #e0a80d;
+                transition: transform 0.3s ease, background 0.3s ease;
+            }
+
+            .contact .info span.contact-icon:hover {
+                transform: scale(1.08);
+                background: rgba(224, 168, 13, 0.25);
+            }
+
+            /* Footer social */
+            .footer .social-icons span {
+                display: inline-flex;
+                width: 40px;
+                height: 40px;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                border: 1px solid rgba(224, 168, 13, 0.35);
+                margin: 0 4px;
+                cursor: pointer;
+                transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            }
+
+            .footer .social-icons span:hover {
+                background: #e0a80d;
+                color: #1a1a1a;
+                border-color: #e0a80d;
+                transform: translateY(-4px);
+            }
+
+            /* Back to top */
+            .back-to-top {
+                position: fixed;
+                right: 24px;
+                bottom: 24px;
+                width: 46px;
+                height: 46px;
+                border-radius: 50%;
+                background: #e0a80d;
+                color: #1a1a1a;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 18px;
+                text-decoration: none;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(12px);
+                transition: opacity 0.35s ease, visibility 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+                z-index: 999;
+                box-shadow: 0 8px 24px rgba(224, 168, 13, 0.35);
+            }
+
+            .back-to-top.visible {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+                animation: pulse-gold 2s ease-in-out infinite;
+            }
+
+            .back-to-top:hover {
+                color: #1a1a1a;
+                text-decoration: none;
+                box-shadow: 0 12px 32px rgba(224, 168, 13, 0.5);
+                transform: translateY(-3px);
+                animation: none;
+            }
+
+            @keyframes pulse-gold {
+                0%, 100% { box-shadow: 0 8px 24px rgba(224, 168, 13, 0.35); }
+                50% { box-shadow: 0 8px 32px rgba(224, 168, 13, 0.7); }
+            }
+
+            /* Magnetic tilt helper */
+            .tilt-card {
+                transform-style: preserve-3d;
+                will-change: transform;
+            }
+
+            /* Section titles — centered on page */
+            .section-title {
+                position: relative;
+                display: block !important;
+                width: 100%;
+                text-align: center !important;
+            }
+
+            .section-title::after {
+                content: '';
+                display: block;
+                width: 64px;
+                height: 3px;
+                margin: 16px auto 0;
+                background: linear-gradient(90deg, transparent, #e0a80d, transparent);
+                border-radius: 2px;
+            }
+
+            .about-me .section-title {
+                text-align: left !important;
+            }
+
+            .about-me .section-title::after {
+                margin-left: 0;
+                margin-right: auto;
+                background: linear-gradient(90deg, #e0a80d, transparent);
+            }
+
+            /* CTA pulse so interaction is obvious */
+            .slider .left-content .btn {
+                animation: cta-pulse 2.4s ease-in-out infinite;
+            }
+
+            .slider .left-content .btn:hover {
+                animation: none;
+            }
+
+            @keyframes cta-pulse {
+                0%, 100% { box-shadow: 0 0 0 0 rgba(224, 168, 13, 0.35); }
+                50% { box-shadow: 0 0 0 12px rgba(224, 168, 13, 0); }
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                .reveal,
+                .services .box,
+                .portfolio .single-portfolio-item,
+                .scroll-hint .mouse::before,
+                .slider .left-content .btn,
+                .back-to-top.visible {
+                    transition: none !important;
+                    animation: none !important;
+                    opacity: 1 !important;
+                    transform: none !important;
+                }
+                .cursor-glow { display: none !important; }
+            }
         </style>
 
     </head>
 
     <body>
+        <div class="scroll-progress" id="scrollProgress"></div>
+        <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
         <!-- menu -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="#"><img src="img/logo.png" alt=""></a>
                 <button
@@ -100,19 +651,19 @@
                     <div class="row all-content">
                         <div class="col-12">
                             <div class="left-content">
-                                <p class="hello">
+                                <p class="hello reveal">
                                     HELLO I'M</p>
-                                <div class="animated-headlines">
+                                <div class="animated-headlines reveal reveal-delay-1">
                                     <h1 class="cd-headline clip is-full-width">
                                         <span class="cd-words-wrapper">
                                             <b class="is-visible">Septian Eko Nurcahyanto</b>
                                             <b>Web Developer</b>
-                                            <b>DevSecOps Enginer</b>
+                                            <b>DevSecOps Engineer</b>
                                             <b>Software Architect</b>
                                         </span>
                                     </h1>
                                 </div>
-                                <p class="paragraph">
+                                <p class="paragraph reveal reveal-delay-2">
                                     Having spent over six years in the IT sector, I have dedicated myself to crafting innovative software solutions and ensuring the security of applications from the development phase through to production.
                                     My expertise spans a broad range of skills, including application development, system integration, and the application of DevSecOps principles. This diverse skill set enables me to enhance the efficiency and security of your applications, ensuring they meet the highest standards of quality and innovation.
                                     Let's collaborate to transform your digital challenges into opportunities for growth.
@@ -122,24 +673,37 @@
                                     Kemampuan serbaguna ini memampukan saya untuk meningkatkan efisiensi serta keamanan aplikasi Anda, memastikan bahwa mereka memenuhi standar kualitas dan inovasi yang tinggi.
                                     Mari berkolaborasi untuk mengubah setiap tantangan digital yang dihadapi menjadi momentum pertumbuhan yang berarti bagi bisnis Anda.
                                 </p>
-                                <a href="docs/MyPortofolio.pdf" class="btn" target="_blank" z-index="-1">
+                                <a href="docs/MyPortofolio.pdf" class="btn reveal reveal-delay-3" target="_blank">
                                     Download CV</a>
                             </div>
                         </div>
                     </div>
             </div>
             <div id="particles-js" class="particels"></div>
+            <a href="#about" class="scroll-hint" aria-label="Scroll to about">
+                <span class="mouse"></span>
+                <span>Scroll</span>
+            </a>
         </section>
+
+        <!-- wave: hero → about (overlays bottom of hero, no color band) -->
+        <div class="section-divider" aria-hidden="true">
+            <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#2d2e2e" d="M0,0 C360,80 1080,80 1440,0 L1440,80 L0,80 Z"></path>
+            </svg>
+        </div>
 
         <!-- tentang saya -->
         <section class="about-me" id="about">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-5 d-flex justify-content-center">
-                        <img src="img/foto/4.jpg" alt="" class="img-fluid rounded" class="mx-auto d-block">
+                    <div class="col-md-5 d-flex justify-content-center align-items-start">
+                        <div class="about-photo">
+                            <img src="img/foto/4.jpg" alt="Septian Eko" class="reveal from-left">
+                        </div>
                     </div>
-                    <div class="col-md-7">
-                        <h2>About Me</h2>
+                    <div class="col-md-7 reveal from-right">
+                        <h2 class="section-title">About Me</h2>
                         <p>
                         Seorang profesional berpengalaman di bidang teknologi informasi dengan spesialisasi sebagai Software Developer, DevSecOps Engineer, dan Software Architect.
                         Selama lebih dari enam tahun, saya telah mendedikasikan diri dalam mengembangkan solusi perangkat lunak yang inovatif dan memastikan keamanan aplikasi dari tahap pengembangan hingga produksi.
@@ -158,70 +722,95 @@
             </div>
         </section>
 
+        <!-- wave: about → services -->
+        <div class="section-divider" aria-hidden="true">
+            <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#262727" d="M0,0 C240,70 480,10 720,50 C960,90 1200,20 1440,0 L1440,80 L0,80 Z"></path>
+            </svg>
+        </div>
+
         <!-- service-->
-        <section class="services" id="services">
-            <h2 class="text-center">Our Services</h2>
+        <section class="services" id="services" style="background:#262727; padding-top: 70px;">
+            <h2 class="text-center section-title reveal">Our Services</h2>
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-lg-4">
-                        <div class="box">
-                            <span class="fa fa-cog"></span>
+                        <div class="box tilt-card reveal reveal-delay-1">
+                            <span class="service-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                            </span>
                             <h3>Custom Web Development</h3>
                             <p>We specialize in creating custom web solutions tailored to your business needs. From corporate websites to complex web applications, we leverage the latest technologies to deliver exceptional user experiences and boost your business performance.</p>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <div class="box">
-                            <span class="fa fa-shield"></span>
+                        <div class="box tilt-card reveal reveal-delay-2">
+                            <span class="service-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+                            </span>
                             <h3>Application Security & DevSecOps Consulting</h3>
                             <p>Integrating best security practices into your software development lifecycle, we offer DevSecOps consulting to safeguard your applications from development to production, reducing risks and accelerating deployment.</p>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <div class="box">
-                            <span class="fa fa-lock"></span>
+                        <div class="box tilt-card reveal reveal-delay-3">
+                            <span class="service-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/><circle cx="12" cy="16" r="1.5"/></svg>
+                            </span>
                             <h3>System Hardening</h3>
                             <p>Implementing system hardening strategies, we enhance the security of your IT infrastructure. We assess and fortify system configurations, reducing attack surfaces and protecting your data and applications from security threats.</p>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <div class="box">
-                            <span class="fa fa-cubes"></span>
+                        <div class="box tilt-card reveal reveal-delay-1">
+                            <span class="service-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg>
+                            </span>
                             <h3>Software Architecture & System Design</h3>
                             <p>We design scalable and high-performance software architectures. Our strategic system designs ensure your applications grow with your business, maintaining efficiency and manageability.</p>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <div class="box">
-                            <span class="fa fa-rocket"></span>
+                        <div class="box tilt-card reveal reveal-delay-2">
+                            <span class="service-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="M5 19l6-14 2 5 6 2-8 7z"/><path d="M11 10l2 5"/></svg>
+                            </span>
                             <h3>Performance Optimization & Scalability</h3>
                             <p>Enhance your application's performance and scalability with our advanced technical solutions. We conduct in-depth analysis and implement optimal practices to ensure your application can handle increasing workloads seamlessly.</p>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <div class="box">
-                            <span class="fa fa-plug"></span>
+                        <div class="box tilt-card reveal reveal-delay-3">
+                            <span class="service-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="M8 12H4a2 2 0 0 1 0-4h4"/><path d="M16 12h4a2 2 0 0 0 0-4h-4"/><path d="M8 8h8v8H8z"/><path d="M8 16H4a2 2 0 0 0 0 4h4"/><path d="M16 16h4a2 2 0 0 1 0 4h-4"/></svg>
+                            </span>
                             <h3>API Development and System Integration</h3>
                             <p>Developing and integrating secure and efficient APIs, we facilitate seamless system communication. We ensure smooth data integration between your application and third-party services, enhancing functionality and flexibility.</p>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <div class="box">
-                            <span class="fa fa-wrench"></span>
+                        <div class="box tilt-card reveal reveal-delay-1">
+                            <span class="service-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                            </span>
                             <h3>Application Maintenance & Support</h3>
                             <p>Providing comprehensive application maintenance services, we ensure your application operates optimally at all times. From routine updates and bug fixes to feature enhancements, we keep your application relevant and efficient.</p>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <div class="box">
-                            <span class="fa fa-server"></span>
+                        <div class="box tilt-card reveal reveal-delay-2">
+                            <span class="service-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="6" rx="2"/><path d="M6 8h.01M10 8h.01M6 17h.01"/></svg>
+                            </span>
                             <h3>Managed Hosting & VPS Services</h3>
                             <p>Offering top-tier managed hosting and VPS services tailored to your business needs. We ensure your online presence is robust, reliable, and ready to scale. From server setup, security hardening, performance optimization, to continuous monitoring, let us handle the technicalities while you focus on growing your business.</p>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <div class="box">
-                            <span class="fa fa-graduation-cap"></span>
+                        <div class="box tilt-card reveal reveal-delay-3">
+                            <span class="service-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                            </span>
                             <h3>Technology Training & Workshops</h3>
                             <p>We offer training sessions and workshops on various technology topics for your team, from web development and application security to cloud technology usage. We help enhance your team's skills and knowledge, ensuring they stay abreast of the latest trends.</p>
                         </div>
@@ -230,6 +819,13 @@
                 </div>
             </div>
         </section>
+
+        <!-- wave: services → portfolio -->
+        <div class="section-divider" aria-hidden="true">
+            <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#2d2e2e" d="M0,0 C360,90 1080,10 1440,0 L1440,80 L0,80 Z"></path>
+            </svg>
+        </div>
 
         <!-- statistik -->
         <!-- <section class="some-facts">
@@ -278,10 +874,10 @@
         <!-- portofolio -->
         <section class="portfolio" id="portfolio">
             <div class="container">
-                <h2 class="text-center">Portfolio</h2>
+                <h2 class="text-center section-title reveal">Portfolio</h2>
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="button-group filter-button-group text-center">
+                        <div class="button-group filter-button-group text-center reveal reveal-delay-1">
                             <button data-filter="*" class="active">All</button>
                             <button data-filter=".development">Development</button>
                             <button data-filter=".hardening">Hardening System</button>
@@ -296,8 +892,8 @@
                 </div>
                 <div class="row grid">
                     <div class="col-lg-4 col-md-6 grid-item development">
-                        <div class="single-portfolio-item ">
-                            <img src="img/portfolio/siberintegritas.png" alt="" class="img-fluid">
+                        <div class="single-portfolio-item reveal scale-in">
+                            <img src="img/portfolio/siberintegritas.png" alt="Siberintegritas" class="img-fluid">
                             <div class="overlay text-center">
                                 <div class="content">
                                     <h3>Siberintegritas</h3>
@@ -308,9 +904,74 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-4 col-md-6 grid-item development">
+                        <div class="single-portfolio-item reveal scale-in reveal-delay-1">
+                            <img src="img/portfolio/bunahomecare.png" alt="Buna Homecare" class="img-fluid">
+                            <div class="overlay text-center">
+                                <div class="content">
+                                    <h3>Buna Homecare</h3>
+                                    <p>Web Application</p>
+                                    <a href="img/portfolio/bunahomecare.png" class="image-link">
+                                        <span class="fa fa-eye"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 grid-item development">
+                        <div class="single-portfolio-item reveal scale-in reveal-delay-2">
+                            <img src="img/portfolio/cekreputasi.png" alt="Cek Reputasi" class="img-fluid">
+                            <div class="overlay text-center">
+                                <div class="content">
+                                    <h3>Cek Reputasi</h3>
+                                    <p>Web Application</p>
+                                    <a href="img/portfolio/cekreputasi.png" class="image-link">
+                                        <span class="fa fa-eye"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 grid-item development">
+                        <div class="single-portfolio-item reveal scale-in">
+                            <img src="img/portfolio/ejp.png" alt="EJP" class="img-fluid">
+                            <div class="overlay text-center">
+                                <div class="content">
+                                    <h3>EJP</h3>
+                                    <p>Web Application</p>
+                                    <a href="img/portfolio/ejp.png" class="image-link">
+                                        <span class="fa fa-eye"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 grid-item development">
+                        <div class="single-portfolio-item reveal scale-in reveal-delay-1">
+                            <img src="img/portfolio/kemekkah.png" alt="KeMekkah" class="img-fluid">
+                            <div class="overlay text-center">
+                                <div class="content">
+                                    <h3>KeMekkah</h3>
+                                    <p>Web Application</p>
+                                    <a href="img/portfolio/kemekkah.png" class="image-link">
+                                        <span class="fa fa-eye"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 grid-item development">
+                        <div class="single-portfolio-item reveal scale-in reveal-delay-2">
+                            <img src="img/portfolio/lokerarsitek.png" alt="Loker Arsitek" class="img-fluid">
+                            <div class="overlay text-center">
+                                <div class="content">
+                                    <h3>Loker Arsitek</h3>
+                                    <p>Web Application</p>
+                                    <a href="img/portfolio/lokerarsitek.png" class="image-link">
+                                        <span class="fa fa-eye"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-lg-4 col-md-6 grid-item object">
-                        <div class="single-portfolio-item">
-                            <img src="img/portfolio/minio.png" alt="" class="img-fluid">
+                        <div class="single-portfolio-item reveal scale-in reveal-delay-1">
+                            <img src="img/portfolio/minio.png" alt="Minio" class="img-fluid">
                             <div class="overlay text-center">
                                 <div class="content">
                                     <h3>Minio</h3>
@@ -322,8 +983,8 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 grid-item object">
-                        <div class="single-portfolio-item">
-                            <img src="img/portfolio/minio2.png" alt="" class="img-fluid">
+                        <div class="single-portfolio-item reveal scale-in reveal-delay-2">
+                            <img src="img/portfolio/minio2.png" alt="Minio" class="img-fluid">
                             <div class="overlay text-center">
                                 <div class="content">
                                     <h3>Minio</h3>
@@ -335,8 +996,8 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 grid-item object">
-                        <div class="single-portfolio-item">
-                            <img src="img/portfolio/minio3.png" alt="" class="img-fluid">
+                        <div class="single-portfolio-item reveal scale-in">
+                            <img src="img/portfolio/minio3.png" alt="Minio" class="img-fluid">
                             <div class="overlay text-center">
                                 <div class="content">
                                     <h3>Minio</h3>
@@ -348,8 +1009,8 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 grid-item virtual">
-                        <div class="single-portfolio-item">
-                            <img src="img/portfolio/proxmox.png" alt="" class="img-fluid">
+                        <div class="single-portfolio-item reveal scale-in reveal-delay-1">
+                            <img src="img/portfolio/proxmox.png" alt="Proxmox" class="img-fluid">
                             <div class="overlay text-center">
                                 <div class="content">
                                     <h3>Proxmox</h3>
@@ -361,8 +1022,8 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 grid-item virtual">
-                        <div class="single-portfolio-item">
-                            <img src="img/portfolio/proxmox2.png" alt="" class="img-fluid">
+                        <div class="single-portfolio-item reveal scale-in reveal-delay-2">
+                            <img src="img/portfolio/proxmox2.png" alt="Proxmox" class="img-fluid">
                             <div class="overlay text-center">
                                 <div class="content">
                                     <h3>Proxmox</h3>
@@ -375,7 +1036,7 @@
                     </div>
                     <div class="col-lg-4 col-md-6 grid-item hide-initially api">
                         <div class="single-portfolio-item">
-                            <img src="img/portfolio/kong.png" alt="" class="img-fluid">
+                            <img src="img/portfolio/kong.png" alt="Kong" class="img-fluid">
                             <div class="overlay text-center">
                                 <div class="content">
                                     <h3>Kong</h3>
@@ -388,7 +1049,7 @@
                     </div>
                     <div class="col-lg-4 col-md-6 grid-item hide-initially architecture">
                         <div class="single-portfolio-item">
-                            <img src="img/portfolio/arch.png" alt="" class="img-fluid">
+                            <img src="img/portfolio/arch.png" alt="Cekreputasi Architecture" class="img-fluid">
                             <div class="overlay text-center">
                                 <div class="content">
                                     <h3>Cekreputasi</h3>
@@ -401,7 +1062,7 @@
                     </div>
                     <div class="col-lg-4 col-md-6 grid-item hide-initially architecture">
                         <div class="single-portfolio-item">
-                            <img src="img/portfolio/arch2.png" alt="" class="img-fluid">
+                            <img src="img/portfolio/arch2.png" alt="Cekreputasi Small Architecture" class="img-fluid">
                             <div class="overlay text-center">
                                 <div class="content">
                                     <h3>Cekreputasi</h3>
@@ -417,10 +1078,17 @@
             </div>
         </section>
 
+        <!-- wave: portfolio → testimonials -->
+        <div class="section-divider" aria-hidden="true">
+            <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#212222" d="M0,0 C480,80 960,80 1440,0 L1440,80 L0,80 Z"></path>
+            </svg>
+        </div>
+
         <!-- testimoni-->
         <section class="testimonials" id="testimonials">
             <div class="container text-center">
-                <h2>Testimonials</h2>
+                <h2 class="section-title reveal">Testimonials</h2>
                 <div class="row text-center">
                     <div class="col-md-12">
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -489,60 +1157,19 @@
             </div>
         </section>
 
-        <!-- blog -->
-        <!-- <section class="blog" id="blog">
-            <div class="container">
-                <h2 class="text-center">Our Blog</h2>
-                <div class="row">
-                    <div class="co-md-6 col-lg-4">
-                        <div class="box">
-                            <div class="image">
-                                    <img src="https://via.placeholder.com/400x250" alt="">
-                                    <a href="" class="cate">Web</a>
-                            </div>
-                            <div class="text">
-                                    <h3><a href="">Master These Awesome</a></h3>
-                                    <h4>By Dorian Gray, Jun 27, 2018</h4>
-                                    <p>Lorem Ipsum has been standard. Lorem Ipsum is simply text of the printing and typesetting industry. Lorem Ipsum has been</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="co-md-6 col-lg-4">
-                            <div class="box">
-                                <div class="image">
-                                        <img src="https://via.placeholder.com/400x250" alt="">
-                                        <a href="" class="cate">Web</a>
-                                </div>
-                                <div class="text">
-                                        <h3><a href="">Best Design Items to Appeal</a></h3>
-                                        <h4>By Dorian Gray, Jun 27, 2018</h4>
-                                        <p>Lorem Ipsum has been standard. Lorem Ipsum is simply text of the printing and typesetting industry. Lorem Ipsum has been</p>
-                                </div>
-                            </div>
-                        </div>
-                    <div class="co-md-6 col-lg-4">
-                        <div class="box">
-                            <div class="image">
-                                    <img src="https://via.placeholder.com/400x250" alt="">
-                                    <a href="" class="cate">Web</a>
-                            </div>
-                            <div class="text">
-                                    <h3><a href="">The 20 Best Lightroom Presets</a></h3>
-                                    <h4>By Dorian Gray, Jun 27, 2018</h4>
-                                    <p>Lorem Ipsum has been standard. Lorem Ipsum is simply text of the printing and typesetting industry. Lorem Ipsum has been</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> -->
+        <!-- wave: testimonials → contact -->
+        <div class="section-divider" aria-hidden="true">
+            <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#2d2e2e" d="M0,0 C300,70 900,70 1440,0 L1440,80 L0,80 Z"></path>
+            </svg>
+        </div>
 
         <!-- kontak -->
-        <section class="contact" id="contact"> 
-            <h2 class="text-center">Keep In Touch</h2>
+        <section class="contact" id="contact" style="padding-top: 80px;"> 
+            <h2 class="text-center section-title reveal">Keep In Touch</h2>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-8 reveal from-left">
                         <form onsubmit="sendWhatsAppMessage(event)">
                             <div class="row">
                                 <div class="col-sm-6">
@@ -561,7 +1188,7 @@
                             <button class="btn btn-block" type="submit">Send Now!</button>
                         </form>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 reveal from-right">
                         <div class="info">
                             <span class="fa fa-map-marker"></span>
                             <p>Bojongsari, Depok, 
@@ -587,8 +1214,12 @@
             <span class="fa fa-dribbble" aria-hidden="true"></span>
             <span class="fa fa-skype" aria-hidden="true"></span>
             </div>
-            <p>All Right Reserved 2024</p>
+            <p>All Right Reserved 2026</p>
         </footer>
+
+        <a href="#slider" class="back-to-top" id="backToTop" aria-label="Back to top">
+            <span class="fa fa-angle-up"></span>
+        </a>
 
         <!-- ==== javascript libraries ==== -->
         <!-- jQuery-->
@@ -656,6 +1287,107 @@
 
                 // Secara default, sembunyikan item yang ditandai untuk disembunyikan
                 $('.hide-initially').hide();
+
+                // —— Interactive enhancements ——
+                var $nav = $('#mainNav');
+                var $progress = $('#scrollProgress');
+                var $backToTop = $('#backToTop');
+                var $cursorGlow = $('#cursorGlow');
+                var sectionIds = ['slider', 'about', 'services', 'portfolio', 'testimonials', 'contact'];
+                var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+                // Scroll progress, navbar shrink, back-to-top, active nav
+                function onScroll() {
+                    var scrollTop = $(window).scrollTop();
+                    var docHeight = $(document).height() - $(window).height();
+                    var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+
+                    $progress.css('width', progress + '%');
+                    $nav.toggleClass('scrolled', scrollTop > 40);
+                    $backToTop.toggleClass('visible', scrollTop > 400);
+
+                    var current = sectionIds[0];
+                    sectionIds.forEach(function (id) {
+                        var $sec = $('#' + id);
+                        if ($sec.length && scrollTop >= $sec.offset().top - 140) {
+                            current = id;
+                        }
+                    });
+                    $('.navbar-nav .nav-link').each(function () {
+                        var href = $(this).attr('href') || '';
+                        $(this).toggleClass('active', href === '#' + current);
+                    });
+                }
+
+                $(window).on('scroll', onScroll);
+                onScroll();
+
+                // Scroll reveal — wait until element enters view
+                if (!reduceMotion && 'IntersectionObserver' in window) {
+                    var revealObserver = new IntersectionObserver(function (entries) {
+                        entries.forEach(function (entry) {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('is-visible');
+                                revealObserver.unobserve(entry.target);
+                            }
+                        });
+                    }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
+
+                    document.querySelectorAll('.reveal').forEach(function (el) {
+                        revealObserver.observe(el);
+                    });
+                } else {
+                    $('.reveal').addClass('is-visible');
+                }
+
+                // Cursor glow + spotlight on service cards
+                if (!reduceMotion && window.matchMedia('(pointer: fine)').matches) {
+                    $(document).on('mousemove', function (e) {
+                        $cursorGlow.addClass('is-on').css({
+                            left: e.clientX + 'px',
+                            top: e.clientY + 'px'
+                        });
+                    });
+
+                    $('.tilt-card').on('mousemove', function (e) {
+                        var rect = this.getBoundingClientRect();
+                        var x = e.clientX - rect.left;
+                        var y = e.clientY - rect.top;
+                        var rotateY = ((x / rect.width) - 0.5) * 16;
+                        var rotateX = ((y / rect.height) - 0.5) * -16;
+                        this.style.setProperty('--mx', x + 'px');
+                        this.style.setProperty('--my', y + 'px');
+                        $(this).css('transform', 'perspective(900px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-14px) scale(1.02)');
+                    }).on('mouseleave', function () {
+                        $(this).css('transform', '');
+                    });
+                }
+
+                // Soft parallax on hero content
+                if (!reduceMotion) {
+                    $(window).on('scroll', function () {
+                        var y = $(window).scrollTop();
+                        if (y < window.innerHeight) {
+                            $('.slider .left-content').css('transform', 'translateY(' + (y * 0.18) + 'px)');
+                            $('.scroll-hint').css('opacity', Math.max(0, 1 - y / 280));
+                        }
+                    });
+                }
+
+                // Make filter buttons feel snappier
+                $('.filter-button-group button').on('click', function () {
+                    $('.grid-item:visible .single-portfolio-item').css({
+                        opacity: 0,
+                        transform: 'scale(0.92)'
+                    });
+                    setTimeout(function () {
+                        $('.grid-item:visible .single-portfolio-item').css({
+                            opacity: 1,
+                            transform: 'none',
+                            transition: 'opacity 0.35s ease, transform 0.35s ease'
+                        });
+                    }, 40);
+                });
             });
         </script>
 
